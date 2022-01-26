@@ -7,11 +7,23 @@ const morgan = require('morgan'); // logging
 // const bodyParser = require('body-parser'); you no longer need body-parser package...it comes built into expressJS now
 
 const app = express()
-app.use(cors())
+app.use(cors()) // NB! CORS is important for access control. CORS allows restrictive access to servers
 app.use(helmet())
 app.use(express.json()) // you no longer need body-parser package...it comes built into expressJS now
 app.use(morgan('combined'));
 app.use(helmet());
+
+// Below piece of code only permits the server to load resources from below sites
+var whitelist = ['https://pleabanshee.github.io', 'http://example2.com']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
 
 app.get('/', (req, res) => {
   // (name, value, {options}): creates a cookie to store server data. Headers prevents cookie from being accessed by client and attackers
