@@ -2,13 +2,15 @@ const express = require('express')
 const cors = require('cors')
 const helmet = require('helmet')
 const winston = require('winston');
+const morgan = require('morgan'); // logging
 
 // const bodyParser = require('body-parser'); you no longer need body-parser package...it comes built into expressJS now
 
 const app = express()
 app.use(cors())
 app.use(helmet())
-app.use(express.json()) //you no longer need body-parser package...it comes built into expressJS now
+app.use(express.json()) // you no longer need body-parser package...it comes built into expressJS now
+app.use(morgan('combined'));
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
