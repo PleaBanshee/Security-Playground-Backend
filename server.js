@@ -1,6 +1,6 @@
 const express = require('express')
 const cors = require('cors')
-const helmet = require('helmet')
+const helmet = require('helmet') // secure headers
 const winston = require('winston');
 const morgan = require('morgan'); // logging
 
@@ -11,6 +11,7 @@ app.use(cors())
 app.use(helmet())
 app.use(express.json()) // you no longer need body-parser package...it comes built into expressJS now
 app.use(morgan('combined'));
+app.use(helmet());
 
 app.get('/', (req, res) => {
   // (name, value, {options}): creates a cookie to store server data. Headers prevents cookie from being accessed by client and attackers
