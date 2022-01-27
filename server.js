@@ -14,6 +14,7 @@ app.use(morgan('combined'));
 app.use(helmet());
 
 // Below piece of code only permits the server to load resources from below sites
+// Remove pleabanshee url and check what happens in the Chrome devtools console when you submit data
 var whitelist = ['https://pleabanshee.github.io', 'http://example2.com']
 var corsOptions = {
   origin: function (origin, callback) {
